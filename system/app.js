@@ -200,14 +200,14 @@ var authPath = "/user";
                 window.location.replace("#!/login");
             }
             else {
+                var config = JSON.parse(result);
+                $rootScope.config = config;
+                setRoute(config.root.route);  
+
                 var path = window.location.pathname.split('/')[1];
 
                 if ("templates" !== path) {
                     var template = window.localStorage.getItem("template");
-            
-                    var config = JSON.parse(result);
-                    $rootScope.config = config;
-                    setRoute(config.root.route, template);  
 
                     if ( template === null) {
                         window.location.replace("./index.html#!/login");        
@@ -229,7 +229,7 @@ var authPath = "/user";
         });
 
 
-        function setRoute(data, template) {
+        function setRoute(data) {
 
             var j = 0, currentRoute;
 
@@ -242,10 +242,6 @@ var authPath = "/user";
                 currentRoute = data.pages[j];
 
                 controllers.push('../../' + currentRoute.controllerUrl);
-
-                if (template != "default") {
-                    currentRoute.templateUrl = currentRoute.templateUrl.replace("/default/", "/" + template + "/");
-                }
 
                 $routeProviderReference.when(currentRoute.routeName, {
 
