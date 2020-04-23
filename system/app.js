@@ -200,27 +200,23 @@ var authPath = "/user";
                 window.location.replace("#!/login");
             }
             else {
-                var config = JSON.parse(result);
-                $rootScope.config = config;
-                setRoute(config.root.route);
                 var path = window.location.pathname.split('/')[1];
 
                 if ("templates" !== path) {
                     var template = window.localStorage.getItem("template");
-			
+            
+                    var config = JSON.parse(result);
+                    $rootScope.config = config;
+                    setRoute(config.root.route, template);  
+
                     if ( template === null) {
                         window.location.replace("./index.html#!/login");        
                     }
                     else {
                         window.location.replace("./templates/" + template + "/index.html");
-                    }
+                    }                  
                 }		
-            }
-            //var myDataPromise1 = getjson.getData($configUrl);  // http://localhost:5000/api/config  // bu kısım authservice ne alınacak
-            //myDataPromise1.then(function (result) {
-            //    $rootScope.Config = result;
-            //    setRoute(result.Root.Route); 
-            //});       
+            }      
         }
 
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
@@ -233,7 +229,7 @@ var authPath = "/user";
         });
 
 
-        function setRoute(data) {
+        function setRoute(data, template) {
 
             var j = 0, currentRoute;
 
@@ -246,6 +242,10 @@ var authPath = "/user";
                 currentRoute = data.pages[j];
 
                 controllers.push('../../' + currentRoute.controllerUrl);
+
+                if (template != "default") {
+                    currentRoute.templateUrl = currentRoute.templateUrl.replace("/default/", "/" + template + "/");
+                }
 
                 $routeProviderReference.when(currentRoute.routeName, {
 
