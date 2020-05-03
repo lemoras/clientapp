@@ -93,7 +93,7 @@
         }
 
         function GetConfig(callback) {           
-                getjson.getData(authServiceUrl + '/system/configs/' + window.location.hostname +'.json')
+                getjson.getData(baseURL + '/system/configs/' + window.location.hostname +'.json')
                     .then(function (res) {
                         callback(res);
                     });
