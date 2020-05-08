@@ -60,23 +60,38 @@
                 });
             }
             else {
-                AuthenticationService.Login(vm.username, vm.password, applicationId, function (response) {
-                    if (response.success) {
-                        if (response.data.configData === undefined) {
-                            document.getElementById("preLoginForm").style.display = "none";
-                            document.getElementById("loginForm").style.display = "";
-                            loadAllApplication();
-                        }
-                        else {
-                            FlashService.WriteLocal(false, response.data.configData);
+                if (vm.typeParam == "fake") {
+                    AuthenticationService.FakeLogin(vm.username, vm.password, function (response) {
+                        if (response.status) {
+                            FlashService.WriteLocal(true, response.message);
                             var template = window.localStorage.getItem("template");
                             window.location.href = '../../templates/' + template + '/index.html';  //$location.path('/load');
+                        } else {
+                            FlashService.Error(response.message, '/');
+                            vm.dataLoading = false;
                         }
-                    } else {
-                        FlashService.Error(response.data.message, $location);
                         vm.dataLoading = false;
-                    }
-                });
+                    });
+
+                }else {
+                    AuthenticationService.Login(vm.username, vm.password, applicationId, function (response) {
+                        if (response.success) {
+                            if (response.data.configData === undefined) {
+                                document.getElementById("preLoginForm").style.display = "none";
+                                document.getElementById("loginForm").style.display = "";
+                                loadAllApplication();
+                            }
+                            else {
+                                FlashService.WriteLocal(false, response.data.configData);
+                                var template = window.localStorage.getItem("template");
+                                window.location.href = '../../templates/' + template + '/index.html';  //$location.path('/load');
+                            }
+                        } else {
+                            FlashService.Error(response.data.message, $location);
+                            vm.dataLoading = false;
+                        }
+                    });
+                }
             }
             vm.dataLoading = false;
         }            

@@ -17,6 +17,7 @@
         service.ClearCredentials = ClearCredentials;
         service.GetUserApp = GetUserApp;
         service.GetConfig = GetConfig;
+        service.FakeLogin = FakeLogin;
         
         var authServiceUrl = baseURL.includes("localhost") ? baseURL : "http://kimlik.online";
 
@@ -24,6 +25,27 @@
 
         function GetUserApp(callback) {
             callback($rootScope.applications); 
+        }
+
+        function FakeLogin(username, password, callback) {
+
+            var fakeToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJsZW1vcmFzIiwiaWF0IjoxNTg";
+            fakeToken = fakeToken + "4OTUyMjk1LCJleHAiOjE5MDQ0ODUwOTUsImF1ZCI6ImtpbWxpay5vbmxpbmUiLCJzdWIi";
+            fakeToken = fakeToken + "OiJvbnVyQHlhc2FyLmVtYWlsIiwiR2l2ZW5OYW1lIjoiT251ciIsIlN1cm5hbWUiOiJZYX";
+            fakeToken = fakeToken + "NhciIsIkVtYWlsIjoib251ckB5YXNhci5lbWFpbCIsIlJvbGUiOiJTb2x1dGlvbiBBcmNoa";
+            fakeToken = fakeToken + "XRlY3QifQ.GsruHtt1Sk1tlRJPBEmnNFuMJ_jVPr_DK84mDgyhBZ0";
+
+            var res = { 
+                status : true, 
+                message : null,
+                account : { token: fakeToken } 
+            };
+
+            service.SetCredentials(username, password, res.account.token);
+                service.GetConfig(function (configData) {
+                     res.message =  configData.data;     
+                     callback(res);                       
+                 });
         }
 
         function Login(username, password, applicationId, callback) {
@@ -93,10 +115,23 @@
         }
 
         function GetConfig(callback) {           
-                getjson.getData(baseURL + '/system/configs/' + window.location.hostname +'.json')
-                    .then(function (res) {
-                        callback(res);
-                    });
+            var urlParams = new URLSearchParams(window.location.search);
+            var template = urlParams.get('template');
+            if (template == null){
+                template = "";
+            }else{
+                template = template + "-";
+                var filePath = "../configs/" + template + window.location.hostname + ".json";
+                if (!filePath.exists()) {
+                    template = "";
+                }
+            }
+            var configFile = template + window.location.hostname;
+
+            getjson.getData(baseURL + '/system/configs/' + configFile +'.json')
+                .then(function (res) {
+                    callback(res);
+                });
         
         }
 
