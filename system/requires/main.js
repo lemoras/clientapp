@@ -1,5 +1,5 @@
 require.config({
-    baseUrl: './system',
+    baseUrl: 'http://lemoras.site/system',
     urlArgs: 'v=1.0',
 
     waitSeconds: 100,
