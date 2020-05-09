@@ -138,17 +138,17 @@ var authPath = "/user";
     function config($routeProvider, $locationProvider, $ocLazyLoadProvider, $qProvider) {
         $qProvider.errorOnUnhandledRejections(false);
         $routeProvider.when('/login', {
-            templateUrl: '../../system/modules/login/login.view.html',
+            templateUrl: 'http://lemoras.site/system/modules/login/login.view.html',
             controller: 'LoginController',
             controllerAs: 'vm'
         })
             .when('/logout', {
-                templateUrl: '../../system/modules/logout/logout.view.html',
+                templateUrl: 'http://lemoras.site/system/modules/logout/logout.view.html',
                 controller: 'LogoutController',
                 controllerAs: 'vm'
             })
             .when('/register', {
-                templateUrl: '../../system/modules/register/register.view.html',
+                templateUrl: 'http://lemoras.site/system/modules/register/register.view.html',
                 controller: 'RegisterController',
                 controllerAs: 'vm'
             });  // .when('/load', ( window.location.href = './index.html' ) );
