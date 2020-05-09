@@ -205,7 +205,7 @@ var authPath = "/user";
                 setRoute(config.root.route);  
 
                 var path = window.location.pathname.split('/')[1];
-
+                
                 if ("templates" !== path) {
                     var template = window.localStorage.getItem("template");
 
@@ -213,7 +213,7 @@ var authPath = "/user";
                         window.location.replace("./index.html#!/login");        
                     }
                     else {
-                        window.location.replace("./templates/" + template + "/index.html");
+                        window.location.replace("./templates/" + template + ".html");
                     }                  
                 }		
             }      

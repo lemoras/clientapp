@@ -51,7 +51,7 @@
                     if (response.status) {
                         FlashService.WriteLocal(true, response.message);
                         var template = window.localStorage.getItem("template");
-                        window.location.href = '../../templates/' + template + '/index.html';  //$location.path('/load');
+                        window.location.href = '../../templates/' + template + '.html';  //$location.path('/load');
                     } else {
                         FlashService.Error(response.message, '/');
                         vm.dataLoading = false;
@@ -65,7 +65,7 @@
                         if (response.status) {
                             FlashService.WriteLocal(true, response.message);
                             var template = window.localStorage.getItem("template");
-                            window.location.href = '../../templates/' + template + '/index.html';  //$location.path('/load');
+                            window.location.href = '../../templates/' + template + '.html';  //$location.path('/load');
                         } else {
                             FlashService.Error(response.message, '/');
                             vm.dataLoading = false;
@@ -84,7 +84,7 @@
                             else {
                                 FlashService.WriteLocal(false, response.data.configData);
                                 var template = window.localStorage.getItem("template");
-                                window.location.href = '../../templates/' + template + '/index.html';  //$location.path('/load');
+                                window.location.href = '../../templates/' + template + '.html';  //$location.path('/load');
                             }
                         } else {
                             FlashService.Error(response.data.message, $location);

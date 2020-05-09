@@ -1,19 +1,22 @@
 var path = window.location.pathname.split('/')[2];
 
+var template = path.split('.html')[0];
 
-if (window.localStorage.getItem("template") != path) {
+if (window.localStorage.getItem("template") != template) {
     if ( window.localStorage.getItem("template") === null)
     {
-        window.location.replace("../../index.html");        
+        window.location.replace("../index.html");        
     }
     else
     {
+
 window.location.replace("#!/login");
 }
 }
 
 
 var result = window.localStorage.getItem("app");
+
             if (result == null) {
                 window.location.replace("#!/login");
             }
