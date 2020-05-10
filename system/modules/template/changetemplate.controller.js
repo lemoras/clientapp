@@ -5,8 +5,8 @@
         .module('app')
         .controller('ChangeTemplateController', ChangeTemplate);
 
-    ChangeTemplate.$inject = ['$rootScope'];
-    function ChangeTemplate($rootScope) {
+    ChangeTemplate.$inject = ['TemplateService', '$rootScope'];
+    function ChangeTemplate(TemplateService, $rootScope) {
         var vm = this;
 
     }
