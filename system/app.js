@@ -107,19 +107,42 @@ var authPath = "/user";
             };
 
             var httpResponse = function(response, isLogin = false) {
-                if (response.status == 200) {
-                    if (response.data.hasOwnProperty("status")
-                        && response.data.hasOwnProperty("message")) {
-                        if (!response.data.status) {
-                            notification.pushWarningNotify(response.data.message, isLogin);
+
+                switch(response.status) {
+                    case 200:
+                        if (response.data.hasOwnProperty("status")
+                            && response.data.hasOwnProperty("message")) {
+                            if (!response.data.status) {
+                                notification.pushWarningNotify(response.data.message, isLogin);
+                            }
+                        }else {
+                            notification.pushSuccessNotify("İşlem başarılı", isLogin);
                         }
-                    }
-                    return response.data;                                        
+                        break;
+                    case 201:
+                        notification.pushSuccessNotify("İşlem başarılı", isLogin);
+                        break;
+                    case 204: //response.data mesaj yerine bu yazılabilir  Transaction successful
+                        notification.pushSuccessNotify("İşlem başarılı", isLogin);
+                        break;
+                    case 403: // You have no access forbidden
+                        notification.pushWarningNotify("Erişim yetiniz bulunmamaktadır", isLogin);
+                        break;
+                    case 401: // The request has not been succeeded because it lacks valid authentication credentials.
+                        notification.pushWarningNotify("Giriş yapılmadığı için iizn verilememektedir", isLogin);
+                        break;
+                    case 404: // The requested request could not be found.
+                        notification.pushInfoNotify("Aranılan istek bulunulamadı", isLogin);
+                        break;
+                    case 500: // The requested request could not be found.
+                        notification.pushDangerNotify("Sunucuda bilinmeyen bir hata oluştu", isLogin);
+                        break;
+                    case 502: // The requested request could not be found.
+                        notification.pushDangerNotify("Hatalı ağ geçidi hatası oluştu", isLogin);
+                        break;
                 }
-                else {
-                    notification.pushWarningNotify(response.data, isLogin);
-                    return response.data;
-                }
+
+                return response.data; 
             };
 
             var httpError = function(response, isLogin = false) {                      
