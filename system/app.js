@@ -107,8 +107,9 @@ var authPath = "/user";
 
             var addAuthHeader = function() {
                 $http.defaults.headers.common['Authorization'] = window.localStorage.getItem("authorization");
-                if(window.localStorage.getItem("authorization") == null) {
-                    $http.defaults.headers.common['UserId'] = "1";
+                var userId = window.localStorage.getItem("fakeuserid");
+                if(userId != null) {
+                    $http.defaults.headers.common['UserId'] = userId;
                 }
             };
 

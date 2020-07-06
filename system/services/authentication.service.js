@@ -22,6 +22,8 @@
         
         var authServiceUrl = baseURL.includes("localhost") ? baseURL : "http://kimlik.online";
 
+        var isFakeLogin = false;
+
         return service;
 
         function GetUserApp(callback) {
@@ -29,6 +31,8 @@
         }
 
         function FakeLogin(username, password, callback) {
+
+            isFakeLogin = true;
 
             var fakeToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJsZW1vcmFzIiwiaWF0IjoxNTg";
             fakeToken = fakeToken + "4OTUyMjk1LCJleHAiOjE5MDQ0ODUwOTUsImF1ZCI6ImtpbWxpay5vbmxpbmUiLCJzdWIi";
@@ -91,6 +95,12 @@
                 }
             };
 
+            if (isFakeLogin) {
+                var userId = "1";
+                window.localStorage.setItem("fakeuserid", userId);
+                $http.defaults.headers.common['UserId'] = userId;
+            }
+
             // set default auth header for http requests
             $http.defaults.headers.common['Authorization'] = 'Bearer ' + token;
 
@@ -105,9 +115,11 @@
 
         function ClearCredentials() {
             //$rootScope.Config = {};
+            isFakeLogin = false;
             $rootScope.config = undefined;
             $rootScope.globals = {};
             $cookies.remove('globals');
+            window.localStorage.removeItem("fakeuserid");
             window.localStorage.removeItem("authorization"); 
             window.localStorage.removeItem("config"); 
 	        window.localStorage.removeItem("app");
