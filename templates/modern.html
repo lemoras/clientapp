@@ -45,12 +45,11 @@
   <link href="assets/css/dataTables.bootstrap4.css" rel="stylesheet">
   <!-- Main styles -->
   <link href="assets/css/admin.css" rel="stylesheet">
-  <!-- Your custom styles -->
-  <link href="assets/css/admin.css" rel="stylesheet">
-	
+</head>
+
 <body id="rootBody" onload="loadProgressBar();" class="fixed-nav sticky-footer" id="page-top">
   <div id="pageContent" style="display: none" width="50" border="0" cellspacing="0" cellpadding="0">
-    <div ng-if="config == undefined" ng-view></div>
+    <ng-view ng-if="config == undefined"></ng-view>
     <div id="configDisplay" style="display: none" width="50" border="0" cellspacing="0" cellpadding="0" ng-if="config != undefined" data-ng-init="loadProgressBar2()">
       <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-default fixed-top" id="mainNav">
@@ -136,26 +135,28 @@
         </div>
       </div>
     </div>
-
-        <!-- Bootstrap core JavaScript-->
-        <script src="assets/js/jquery.min.js"></script>
-        <script src="assets/js/bootstrap.bundle.min.js"></script>
-        <!-- Core plugin JavaScript-->
-        <script src="assets/js/jquery.easing.min.js"></script>
-        <!-- Page level plugin JavaScript-->
-        <script src="assets/js/jquery.dataTables.js"></script>
-        <script src="assets/js/dataTables.bootstrap4.js"></script>
-      <script src="assets/js/jquery.selectbox-0.2.js"></script>
-      <script src="assets/js/retina-replace.min.js"></script>
-      <script src="assets/js/jquery.magnific-popup.min.js"></script>
-        <!-- Custom scripts for all pages-->
-        <script src="assets/js/admin.js"></script>
-
+       
   </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="assets/js/jquery.min.js"></script>
+
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="assets/js/jquery.easing.min.js"></script>
+    <!-- Page level plugin JavaScript-->
+    <script src="assets/js/jquery.dataTables.js"></script>
+    <script src="assets/js/dataTables.bootstrap4.js"></script>
+    <script src="assets/js/jquery.selectbox-0.2.js"></script>
+    <script src="assets/js/retina-replace.min.js"></script>
+    <script src="assets/js/jquery.magnific-popup.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="assets/js/admin.js"></script>
+
 </div>
 
-    <script src="./../system/requires/require.min.js"></script>
-    <script type="text/javascript" src="./../system/requires/loadapp.js"></script>
+<script src="./../system/requires/require.min.js"></script>
+<script type="text/javascript" src="./../system/requires/loadapp.js"></script>
 
 </body>
 </html>
