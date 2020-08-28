@@ -15,7 +15,6 @@ require.config({
         "flash":"services/flash.service",
 
         "login":"modules/login/login.controller",
-        "logout":"modules/logout/logout.controller",
         "register":"modules/register/register.controller"
     },
     shim: {
@@ -28,7 +27,6 @@ require.config({
         "app": { deps: ["angular", "angular-route", "angular-cookies", "ocLazyLoad", 'angular-notify'], exports: "app" },
         "authentication": { deps: ["app"], exports: "authentication" },
         "flash": { deps:["app"], exports: "flash" },
-        "logout": { deps: ["app"], exports: "logout" },
         "login": { deps: ["authentication", "app"], exports: "login" },
         "register": { deps: ["authentication", "app"], exports: "register" }
     },
@@ -37,7 +35,7 @@ require.config({
 
 require(
     [
-        'login', 'logout', 'register',
+        'login', 'register',
         "jquery",
         "angular-route",
         "angular-cookies",
