@@ -36,7 +36,7 @@
             }
             else if (vm.typeParam == "fake") {	
 
-                AuthenticationService.FakeCreateAccount(vm.user.username, vm.user.password, function (response) {
+                AuthenticationService.FakeCreateAccount(function (response) {
                     if (response.success) {
                         FlashService.Success('Kayıt başarılı', true);
                         $location.path('/login');

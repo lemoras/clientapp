@@ -86,7 +86,7 @@
                 });
         }
 
-        function FakeCreateAccount(username, password, callback) {
+        function FakeCreateAccount(callback) {
             isFakeLogin = true;
 
             callback({ success: true, message: "" });
